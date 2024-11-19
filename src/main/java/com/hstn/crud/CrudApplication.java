@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CrudApplication {
 
@@ -18,10 +20,19 @@ public class CrudApplication {
 	public CommandLineRunner commandLineRunner(PupilDAO pupilDAO) {
 		return runner -> {
 //			createPupil(pupilDAO);
-			readPupilInfo(pupilDAO);
+//			readPupilInfo(pupilDAO);
+			getAllPupils(pupilDAO);
 			// при написании этой строки этот метод подчёркивается красным, т.к. такого метода пока
 			// у нас нет, далее наводим на него и нажимаем Alt + Enter и создаём его
 		};
+	}
+
+	private void getAllPupils(PupilDAO pupilDAO) {
+		System.out.println("List of all pupils ...");
+		List<Pupil> pupils = pupilDAO.findAll();
+		for (var p : pupils) {
+			System.out.println(p);
+		}
 	}
 
 	private void readPupilInfo(PupilDAO pupilDAO) {

@@ -12,4 +12,6 @@ public interface PupilDAO {
 
     List<Pupil> findPupilByLastName(String lastName);
 
+    void update(Pupil pupil);
+
 }

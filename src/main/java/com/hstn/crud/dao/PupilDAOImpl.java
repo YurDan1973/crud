@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public class PupilDAOImpl implements PupilDAO {
 
-private EntityManager entityManager;
+    private EntityManager entityManager;
 
-@Autowired
+    @Autowired
     public PupilDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -49,4 +49,10 @@ private EntityManager entityManager;
         return pupils;
     }
 
+    @Override
+    @Transactional
+    // Здесь эту аннотацию ставим, так как данные получаемые мы будем не считывать, а изменять
+    public void update(Pupil pupil) {
+        entityManager.merge(pupil);
+    }
 }

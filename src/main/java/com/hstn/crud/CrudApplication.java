@@ -21,10 +21,19 @@ public class CrudApplication {
 		return runner -> {
 //			createPupil(pupilDAO);
 //			readPupilInfo(pupilDAO);
-			getAllPupils(pupilDAO);
+//			getAllPupils(pupilDAO);
+			getPupilByLastName(pupilDAO);
 			// при написании этой строки этот метод подчёркивается красным, т.к. такого метода пока
 			// у нас нет, далее наводим на него и нажимаем Alt + Enter и создаём его
 		};
+	}
+
+	private void getPupilByLastName(PupilDAO pupilDAO) {
+		System.out.println("List of all pupils ...");
+		List<Pupil> pupils = pupilDAO.findPupilByLastName("Petrov");
+		for (var p : pupils) {
+			System.out.println(p);
+		}
 	}
 
 	private void getAllPupils(PupilDAO pupilDAO) {

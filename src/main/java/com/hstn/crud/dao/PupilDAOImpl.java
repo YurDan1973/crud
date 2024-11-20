@@ -3,6 +3,7 @@ package com.hstn.crud.dao;
 import com.hstn.crud.entity.Pupil;
 import jakarta.persistence.EntityManager;
 
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,4 +40,13 @@ private EntityManager entityManager;
 //        List<Pupil> pupils = entityManager.createQuery("from Pupil order by lastName desc ", Pupil.class).getResultList();
         return pupils;
     }
+
+    @Override
+    public List<Pupil> findPupilByLastName(String lastName) {
+        TypedQuery<Pupil> query = entityManager.createQuery("from Pupil where lastName=:searchlastName", Pupil.class);
+        query.setParameter("searchlastName", lastName);
+        List<Pupil> pupils = query.getResultList();
+        return pupils;
+    }
+
 }

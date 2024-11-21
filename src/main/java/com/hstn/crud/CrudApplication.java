@@ -1,6 +1,7 @@
 package com.hstn.crud;
 
 import com.hstn.crud.dao.PupilDAO;
+import com.hstn.crud.dao.PupilDAOImpl;
 import com.hstn.crud.entity.Pupil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,12 @@ import java.util.List;
 
 @SpringBootApplication
 public class CrudApplication {
+
+    private final PupilDAOImpl pupilDAOImpl;
+
+    public CrudApplication(PupilDAOImpl pupilDAOImpl) {
+        this.pupilDAOImpl = pupilDAOImpl;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(CrudApplication.class, args);
@@ -23,13 +30,29 @@ public class CrudApplication {
 //			readPupilInfo(pupilDAO);
 //			getAllPupils(pupilDAO);
 //          getPupilByLastName(pupilDAO);
-			updatePupil(pupilDAO);
+//			updatePupil(pupilDAO);
+          deletePupilById(pupilDAO);
+//            deleteAll(pupilDAO);
             // при написании этой строки этот метод подчёркивается красным, т.к. такого метода пока
             // у нас нет, далее наводим на него и нажимаем Alt + Enter и создаём его
         };
     }
 
-	private void updatePupil(PupilDAO pupilDAO) {
+    private void deleteAll(PupilDAO pupilDAO) {
+        System.out.println("Delete all pupils ...");
+        int quantityDeletedPupils = pupilDAOImpl.deleteAllPupils();
+        System.out.println("Quantity deleted pupils " + quantityDeletedPupils);
+    }
+
+    private void deletePupilById(PupilDAO pupilDAO) {
+        int idForDeletePupil = 14;
+        pupilDAO.delete(14);
+        // или так как ниже
+        // pupilDAO.delete(idForDeletePupil);
+        // System.out.println("Delete Pupil with id = " + idForDeletePupil);
+    }
+
+    private void updatePupil(PupilDAO pupilDAO) {
 
 		System.out.println("Getting pupil from DB ...");
 		Pupil pupil = pupilDAO.findById(3);
@@ -77,8 +100,8 @@ public class CrudApplication {
 
     private void createPupil(PupilDAO pupilDAO) {
         System.out.println("Creating new pupil ...");
-//		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
-        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
+		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
+//        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
         System.out.println("Saving pupil in DB ...");
         pupilDAO.save(pupil);
         System.out.println("Pupil in DB: \n\t" + pupil);

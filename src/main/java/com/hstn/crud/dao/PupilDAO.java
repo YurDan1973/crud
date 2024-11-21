@@ -14,4 +14,9 @@ public interface PupilDAO {
 
     void update(Pupil pupil);
 
+    void delete(int id);
+    // или так как ниже
+    // void delete(Pupil pupil);
+
+    int deleteAllPupils();
 }

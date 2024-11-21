@@ -45,8 +45,8 @@ public class CrudApplication {
     }
 
     private void deletePupilById(PupilDAO pupilDAO) {
-        int idForDeletePupil = 14;
-        pupilDAO.delete(14);
+        int idForDeletePupil = 3;
+        pupilDAO.delete(3);
         // или так как ниже
         // pupilDAO.delete(idForDeletePupil);
         // System.out.println("Delete Pupil with id = " + idForDeletePupil);

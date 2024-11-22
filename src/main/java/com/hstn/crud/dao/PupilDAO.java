@@ -19,4 +19,7 @@ public interface PupilDAO {
     // void delete(Pupil pupil);
 
     int deleteAllPupils();
+
+    List<Pupil> findPupilByFirstName(String firstName);
+
 }

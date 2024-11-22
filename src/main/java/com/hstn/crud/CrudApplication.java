@@ -12,12 +12,12 @@ import java.util.List;
 
 @SpringBootApplication
 public class CrudApplication {
-
-    private final PupilDAOImpl pupilDAOImpl;
-
-    public CrudApplication(PupilDAOImpl pupilDAOImpl) {
-        this.pupilDAOImpl = pupilDAOImpl;
-    }
+//
+//    private final PupilDAOImpl pupilDAOImpl;
+//
+//    public CrudApplication(PupilDAOImpl pupilDAOImpl) {
+//        this.pupilDAOImpl = pupilDAOImpl;
+//    }
 
     public static void main(String[] args) {
         SpringApplication.run(CrudApplication.class, args);
@@ -33,77 +33,87 @@ public class CrudApplication {
 //			updatePupil(pupilDAOImpl);
 //          deletePupilById(pupilDAOImpl);
 //            deleteAll(pupilDAOImpl);
+//            getPupilByFirstName(pupilDAOImpl);
             // при написании этой строки этот метод подчёркивается красным, т.к. такого метода пока
             // у нас нет, далее наводим на него и нажимаем Alt + Enter и создаём его
         };
     }
 
-    private void deleteAll(PupilDAO pupilDAO) {
+    private void getPupilByFirstName(PupilDAOImpl pupilDAOImpl) {
+        System.out.println("List of all pupils ...");
+        List<Pupil> pupils = pupilDAOImpl.findPupilByFirstName("Oleg");
+        for (var p : pupils) {
+            System.out.println(p);
+        }
+    }
+
+
+    private void deleteAll(PupilDAOImpl pupilDAOImpl) {
         System.out.println("Delete all pupils ...");
         int quantityDeletedPupils = pupilDAOImpl.deleteAllPupils();
         System.out.println("Quantity deleted pupils " + quantityDeletedPupils);
     }
 
-    private void deletePupilById(PupilDAO pupilDAO) {
+    private void deletePupilById(PupilDAOImpl pupilDAOImpl) {
         int idForDeletePupil = 3;
-        pupilDAO.delete(3);
+        pupilDAOImpl.delete(3);
         // или так как ниже
         // pupilDAO.delete(idForDeletePupil);
         // System.out.println("Delete Pupil with id = " + idForDeletePupil);
     }
 
-    private void updatePupil(PupilDAO pupilDAO) {
+    private void updatePupil(PupilDAOImpl pupilDAOImpl) {
 
-		System.out.println("Getting pupil from DB ...");
-		Pupil pupil = pupilDAO.findById(3);
+        System.out.println("Getting pupil from DB ...");
+        Pupil pupil = pupilDAOImpl.findById(3);
         // Это получение ученика из БД по id (Почему по id? Потому что это поле,
         // в отличие от других точно уникально и мы изменяем данные у нужного нам ученика)
 
-		System.out.println("Pupil before update.");
-		System.out.println(pupil);
+        System.out.println("Pupil before update.");
+        System.out.println(pupil);
         // Выводим о нём, о полученном ученике,  информацию
 
-		System.out.println("Update pupil.");
+        System.out.println("Update pupil.");
         pupil.setFirstName("Dima");
-		pupil.setLastName("Antonov");
+        pupil.setLastName("Antonov");
         pupil.setEmai("antonov@gmail.com");
-		pupilDAO.update(pupil);
+        pupilDAOImpl.update(pupil);
         // Изменяем данные ученика
 
-		System.out.println("Pupil after update.");
-		System.out.println(pupil);
+        System.out.println("Pupil after update.");
+        System.out.println(pupil);
         // Выводим новую, изменённую информацию на экран
-	}
+    }
 
-	private void getPupilByLastName(PupilDAO pupilDAO) {
+    private void getPupilByLastName(PupilDAOImpl pupilDAOImpl) {
         System.out.println("List of all pupils ...");
-        List<Pupil> pupils = pupilDAO.findPupilByLastName("Petrov");
+        List<Pupil> pupils = pupilDAOImpl.findPupilByLastName("Petrov");
         for (var p : pupils) {
             System.out.println(p);
         }
     }
 
-    private void getAllPupils(PupilDAO pupilDAO) {
+    private void getAllPupils(PupilDAOImpl pupilDAOImpl) {
         System.out.println("List of all pupils ...");
-        List<Pupil> pupils = pupilDAO.findAll();
+        List<Pupil> pupils = pupilDAOImpl.findAll();
         for (var p : pupils) {
             System.out.println(p);
         }
     }
 
-    private void readPupilInfo(PupilDAO pupilDAO) {
+    private void readPupilInfo(PupilDAOImpl pupilDAOImpl) {
 
         System.out.println("Read Pupil info ...");
-        Pupil pupil = pupilDAO.findById(1);
+        Pupil pupil = pupilDAOImpl.findById(1);
         System.out.println("Pupil info from in DB: \n\t" + pupil);
     }
 
-    private void createPupil(PupilDAO pupilDAO) {
+    private void createPupil(PupilDAOImpl pupilDAOImpl) {
         System.out.println("Creating new pupil ...");
-//		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
-        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
+		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
+//        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
         System.out.println("Saving pupil in DB ...");
-        pupilDAO.save(pupil);
+        pupilDAOImpl.save(pupil);
         System.out.println("Pupil in DB: \n\t" + pupil);
     }
 }

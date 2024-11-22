@@ -81,4 +81,13 @@ public class PupilDAOImpl implements PupilDAO {
         // то запишем его в переменную int quantityOfDeletedPupils
         return quantityOfDeletedPupils;
     }
+
+    @Override
+    public List<Pupil> findPupilByFirstName(String firstName) {
+        TypedQuery<Pupil> query = entityManager.createQuery("from Pupil where firstName=:searchfirstName", Pupil.class);
+        query.setParameter("searchfirstName", firstName);
+        List<Pupil> pupils = query.getResultList();
+        return pupils;
+
+    }
 }

@@ -12,12 +12,6 @@ import java.util.List;
 
 @SpringBootApplication
 public class CrudApplication {
-//
-//    private final PupilDAOImpl pupilDAOImpl;
-//
-//    public CrudApplication(PupilDAOImpl pupilDAOImpl) {
-//        this.pupilDAOImpl = pupilDAOImpl;
-//    }
 
     public static void main(String[] args) {
         SpringApplication.run(CrudApplication.class, args);
@@ -26,7 +20,7 @@ public class CrudApplication {
     @Bean
     public CommandLineRunner commandLineRunner(PupilDAOImpl pupilDAOImpl) {
         return runner -> {
-			createPupil(pupilDAOImpl);
+            createPupil(pupilDAOImpl);
 //			readPupilInfo(pupilDAOImpl);
 //			getAllPupils(pupilDAOImpl);
 //          getPupilByLastName(pupilDAOImpl);
@@ -110,7 +104,7 @@ public class CrudApplication {
 
     private void createPupil(PupilDAOImpl pupilDAOImpl) {
         System.out.println("Creating new pupil ...");
-		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
+        Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
 //        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
         System.out.println("Saving pupil in DB ...");
         pupilDAOImpl.save(pupil);

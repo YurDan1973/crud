@@ -24,15 +24,15 @@ public class CrudApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(PupilDAO pupilDAO) {
+    public CommandLineRunner commandLineRunner(PupilDAOImpl pupilDAOImpl) {
         return runner -> {
-//			createPupil(pupilDAO);
-//			readPupilInfo(pupilDAO);
-//			getAllPupils(pupilDAO);
-//          getPupilByLastName(pupilDAO);
-//			updatePupil(pupilDAO);
-          deletePupilById(pupilDAO);
-//            deleteAll(pupilDAO);
+			createPupil(pupilDAOImpl);
+//			readPupilInfo(pupilDAOImpl);
+//			getAllPupils(pupilDAOImpl);
+//          getPupilByLastName(pupilDAOImpl);
+//			updatePupil(pupilDAOImpl);
+//          deletePupilById(pupilDAOImpl);
+//            deleteAll(pupilDAOImpl);
             // при написании этой строки этот метод подчёркивается красным, т.к. такого метода пока
             // у нас нет, далее наводим на него и нажимаем Alt + Enter и создаём его
         };
@@ -100,8 +100,8 @@ public class CrudApplication {
 
     private void createPupil(PupilDAO pupilDAO) {
         System.out.println("Creating new pupil ...");
-		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
-//        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
+//		Pupil pupil = new Pupil("Ivan", "Ivanov", "ivanov@gmail.com");
+        Pupil pupil = new Pupil("Oleg", "Petrov", "petrov@gmail.com");
         System.out.println("Saving pupil in DB ...");
         pupilDAO.save(pupil);
         System.out.println("Pupil in DB: \n\t" + pupil);
